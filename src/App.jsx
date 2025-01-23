@@ -27,6 +27,17 @@ function App() {
   function handleStateChangeMenu() {
     setCreateProject(true);
   }
+  function addTask(task, oldProject) {
+    if (task.length > 0) {
+      let updatedProject = oldProject;
+      updatedProject.tasks.push(task);
+      setProjects(
+        projects.map((project) =>
+          project === oldProject ? updatedProject : project
+        )
+      );
+    }
+  }
   return (
     <Fragment>
       <SidebarMenu
@@ -38,6 +49,7 @@ function App() {
         isCreateProject={isCreateProject}
         handleStateChange={handleStateChange}
         selectedProject={selectedProject}
+        addTask={addTask}
       ></FormContent>
     </Fragment>
   );
