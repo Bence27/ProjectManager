@@ -4,7 +4,15 @@ import FormContent from "./components/FormContent/FormContent";
 import { useState } from "react";
 
 function App() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([
+    {
+      name: "project1",
+      date: Date.now(),
+      description: "React",
+      tasks: ["Hello"],
+    },
+  ]);
+  const [selectedProject, setSelectedProject] = useState(projects[0]);
   const [isCreateProject, setCreateProject] = useState(false);
   function addNewProject(name, date, description) {
     let newProject = [{ name: null, date: null, description: null, tasks: [] }];
@@ -29,6 +37,7 @@ function App() {
         addNewProject={addNewProject}
         isCreateProject={isCreateProject}
         handleStateChange={handleStateChange}
+        selectedProject={selectedProject}
       ></FormContent>
     </Fragment>
   );

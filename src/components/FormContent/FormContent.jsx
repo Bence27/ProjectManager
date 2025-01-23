@@ -6,14 +6,18 @@ export default function FormContent({
   addNewProject,
   isCreateProject,
   handleStateChange,
+  selectedProject,
 }) {
   const name = useRef();
   const date = useRef();
   const description = useRef();
+  const task = useRef();
   const mainDivClasses = "content-center justify-items-center";
   return (
     <div
-      className={`mt-8 flex-col w-full  ${!isCreateProject && mainDivClasses}`}
+      className={`mt-8 flex-col w-full  ${
+        !isCreateProject && !selectedProject && mainDivClasses
+      }`}
     >
       {isCreateProject ? (
         <Fragment>
@@ -74,6 +78,53 @@ export default function FormContent({
               id="due_date"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+          </div>
+        </Fragment>
+      ) : selectedProject ? (
+        <Fragment>
+          <div className="pl-10 pt-10 flex justify-between">
+            <div className="font-bold text-lg md:text-3xl inline">
+              {selectedProject.name}
+            </div>
+            <button className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100">
+              Delete
+            </button>
+          </div>
+          <div className="pl-10">
+            <div className="text-gray-400">{selectedProject.date}</div>
+          </div>
+          <div className="pl-10 mt-3">
+            <div>{selectedProject.description}</div>
+          </div>
+          <hr className="h-1 mx-auto w-2/3 my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+          <div className="p-10 font-bold text-lg md:text-3xl inline">Tasks</div>
+          <div className="p-10 flex">
+            <input
+              ref={task}
+              type="text"
+              id="task"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Some Task..."
+            />
+            <button className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100">
+              Add task
+            </button>
+          </div>
+          <div className="p-10 flex bg-cyan-100 items-center">
+            {selectedProject.tasks.length > 0 &&
+              selectedProject.tasks.map((task, index) => (
+                <Fragment key={index}>
+                  <div className="inline w-1/2" key={index + 1}>
+                    {task}
+                  </div>
+                  <button
+                    key={index + 2}
+                    className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100"
+                  >
+                    Clear
+                  </button>
+                </Fragment>
+              ))}
           </div>
         </Fragment>
       ) : (
