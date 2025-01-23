@@ -7,12 +7,19 @@ export default function FormContent({
   isCreateProject,
   handleStateChange,
   selectedProject,
+  addTask,
 }) {
   const name = useRef();
   const date = useRef();
   const description = useRef();
   const task = useRef();
   const mainDivClasses = "content-center justify-items-center";
+
+  function clearTaskInput() {
+    addTask(task.current.value, selectedProject);
+    task.current.value = "";
+  }
+
   return (
     <div
       className={`mt-8 flex-col w-full  ${
@@ -106,14 +113,17 @@ export default function FormContent({
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Some Task..."
             />
-            <button className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100">
+            <button
+              className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100"
+              onClick={clearTaskInput}
+            >
               Add task
             </button>
           </div>
-          <div className="p-10 flex bg-cyan-100 items-center">
+          <div>
             {selectedProject.tasks.length > 0 &&
               selectedProject.tasks.map((task, index) => (
-                <Fragment key={index}>
+                <div className="p-10 flex bg-cyan-100 items-center" key={index}>
                   <div className="inline w-1/2" key={index + 1}>
                     {task}
                   </div>
@@ -123,7 +133,7 @@ export default function FormContent({
                   >
                     Clear
                   </button>
-                </Fragment>
+                </div>
               ))}
           </div>
         </Fragment>
