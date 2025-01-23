@@ -9,6 +9,7 @@ export default function FormContent({
   selectedProject,
   addTask,
   clearTask,
+  deleteProject,
 }) {
   const name = useRef();
   const date = useRef();
@@ -94,7 +95,10 @@ export default function FormContent({
             <div className="font-bold text-lg md:text-3xl inline">
               {selectedProject.name}
             </div>
-            <button className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100">
+            <button
+              className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100"
+              onClick={() => deleteProject(selectedProject)}
+            >
               Delete
             </button>
           </div>

@@ -12,7 +12,8 @@ function App() {
       tasks: ["Hello"],
     },
   ]);
-  const [selectedProject, setSelectedProject] = useState(projects[0]);
+  console.log(projects);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [isCreateProject, setCreateProject] = useState(false);
   function addNewProject(name, date, description) {
     let newProject = [{ name: null, date: null, description: null, tasks: [] }];
@@ -49,6 +50,12 @@ function App() {
       )
     );
   }
+  function deleteProject(deletedProject) {
+    setProjects(
+      projects.filter((project) => project.name !== deletedProject.name)
+    );
+    setSelectedProject(null);
+  }
   return (
     <Fragment>
       <SidebarMenu
@@ -62,6 +69,7 @@ function App() {
         selectedProject={selectedProject}
         addTask={addTask}
         clearTask={clearTask}
+        deleteProject={deleteProject}
       ></FormContent>
     </Fragment>
   );
