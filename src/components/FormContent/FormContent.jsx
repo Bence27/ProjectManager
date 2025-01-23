@@ -21,6 +21,14 @@ export default function FormContent({
     addTask(task.current.value, selectedProject);
     task.current.value = "";
   }
+  function handleSave() {
+    addNewProject(
+      name.current.value,
+      date.current.value,
+      description.current.value
+    );
+    handleStateChange();
+  }
 
   return (
     <div
@@ -38,13 +46,7 @@ export default function FormContent({
               Cancel
             </button>
             <button
-              onClick={() =>
-                addNewProject(
-                  name.current.value,
-                  date.current.value,
-                  description.current.value
-                )
-              }
+              onClick={handleSave}
               className="m-1 px-4 py-2 text-xs md:text-base rounded-md bg-stone-800 text-stone-200 hover:bg-stone-600 hover:text-stone-100"
             >
               Save
