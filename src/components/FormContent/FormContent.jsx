@@ -8,6 +8,7 @@ export default function FormContent({
   handleStateChange,
   selectedProject,
   addTask,
+  clearTask,
 }) {
   const name = useRef();
   const date = useRef();
@@ -130,6 +131,7 @@ export default function FormContent({
                   <button
                     key={index + 2}
                     className="m-1 px-4 py-2 text-xs md:text-base rounded-md hover:bg-stone-600 hover:text-stone-100"
+                    onClick={() => clearTask(task, selectedProject)}
                   >
                     Clear
                   </button>
