@@ -38,6 +38,17 @@ function App() {
       );
     }
   }
+  function clearTask(removedTask, oldProject) {
+    let updatedProject = oldProject;
+    updatedProject.tasks = updatedProject.tasks.filter(
+      (task) => task !== removedTask
+    );
+    setProjects(
+      projects.map((project) =>
+        project === oldProject ? updatedProject : project
+      )
+    );
+  }
   return (
     <Fragment>
       <SidebarMenu
@@ -50,6 +61,7 @@ function App() {
         handleStateChange={handleStateChange}
         selectedProject={selectedProject}
         addTask={addTask}
+        clearTask={clearTask}
       ></FormContent>
     </Fragment>
   );
